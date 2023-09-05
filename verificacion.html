@@ -7,8 +7,16 @@
   <h1>Verificación de Correo Electrónico</h1>
   <p id="verificationStatusMessage">¡Hola, tu correo ha sido VERIFICADO!</p>
 
-  <form action="https://script.google.com/macros/s/AKfycbz4ioazOaFDuKTYaFp7v3SZnO6wGm08LNbLSsMzofPX_T0qKCW0kANMjmyNWEhtst_z3A/exec" method="get">
-    <button type="submit">Verificar</button>
-  </form>
+  <script>
+    // Obtén el token de la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var token = urlParams.get('token');
+
+    // Verifica si se ha encontrado un token en la URL
+    if (token) {
+      // Almacena el token en el localStorage
+      localStorage.setItem('token', token);
+    }
+  </script>
 </body>
 </html>
