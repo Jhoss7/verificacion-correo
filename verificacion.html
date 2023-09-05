@@ -7,6 +7,10 @@
   <h1>Verificación de Correo Electrónico</h1>
   <p id="verificationStatusMessage">¡Hola, tu correo ha sido VERIFICADO!</p>
 
+  <div id="tokenDisplay">
+    <!-- Aquí se mostrará el token -->
+  </div>
+
   <script>
     // Obtén el token de la URL
     var urlParams = new URLSearchParams(window.location.search);
@@ -14,9 +18,11 @@
 
     // Verifica si se ha encontrado un token en la URL
     if (token) {
-      // Almacena el token en el localStorage
-      localStorage.setItem('token', token);
+      // Muestra el token en el elemento 'tokenDisplay'
+      var tokenDisplay = document.getElementById('tokenDisplay');
+      tokenDisplay.textContent = 'Token: ' + token;
     }
   </script>
 </body>
 </html>
+
