@@ -5,7 +5,7 @@
 </head>
 <body>
   <h1>Verificación de Correo Electrónico</h1>
-  <p id="verificationStatusMessage">¡Hola, tu correo ha sido VERIFICADO!</p>
+  <p id="verificationStatusMessage">¡Hola, tu correo ha sido VERIFICADOoo!</p>
 
   <div id="tokenDisplay">
     <!-- Aquí se mostrará el token -->
@@ -13,8 +13,10 @@
   <h1>Datos del Google Sheet</h1>
   <div id="sheetData"></div>
 
+  <a href="#" id="saveTokenLink">Guardar Token en Google Sheets</a>
+
   <script>
-        // Obtén el token de la URL
+    // Obtén el token de la URL
     var urlParams = new URLSearchParams(window.location.search);
     var token = urlParams.get('token');
 
@@ -23,43 +25,61 @@
       // Muestra el token en el elemento 'tokenDisplay'
       var tokenDisplay = document.getElementById('tokenDisplay');
       tokenDisplay.textContent = 'Token: ' + token;
+
+      // Manejar el evento de clic en el enlace para guardar el token
+      var saveTokenLink = document.getElementById('saveTokenLink');
+      saveTokenLink.addEventListener('click', function () {
+        // Llama a la función para guardar el token en Google Sheets
+        guardarTokenEnGoogleSheets(token);
+      });
     }
-    // Reemplaza 'TU_JSON_CREDENTIALS' con el contenido de tu archivo de credenciales JSON
-    var credentials = {
-      "type": "service_account",
-      "project_id": "practicasjv",
-      "private_key_id": "7f414dcb54aca7815e2bff8a317370ccc4302291",
-      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCX+I4AMPGclaCv\nE2Q2vomTF0j8SvqIkSC+2ffPnZXCm1xPIBhLPxJXVoVlaFp/53P4QOm43e2XkZJ7\nBQeiDZ3jC8PeqxVyJZTg6D7DfZTHXqY5iRPd/YlfKD8xiGYw9JmP/NwaDT5aaaQs\nC7+WWZkSqrYLJvS3MdxJF6leJWWiN0DvXLAwo1hPxFf6YiT+CO+XaiIQKEfedJXl\nhDepS1dnHdViXgn6t5AsWH9l9e5QuRp3vmmo/QQY9uC3T7UCk9AbV0byXXQdpMe4\nlsSSENeo1nxSwnJOxK/p3QCrIyhrODiYg6JNfZCm6PlmE9mxx0SDy+DKtnmr4x1g\nkuUYVSabAgMBAAECggEACtxA7aORyLJqushEe6MPOttJpHoJQHQ6plj2XDhzSOaI\naMEu60W1Hle5Db+w4/4a7A1bhpIZliDZmoAIBR07AMxI8aNBU5h69L20Ko1RchQC\nBg+VQ2KIjCvYpEYOo4X/aWpVIml64MQ27sziIrEBfvODMfXVPDhMeU6/FFLQ2hBD\nleGCIdxuZxMzzJ9DfKCSANLaFkfVGixawgDpYYVlGJOjMrkt3He7b/8nlopqVwvk\nupywGNKw9r2MhXhsl48+UgZND/0zQDS20xIHFIX3B69O1KKIqpAPxLPr7P7gc1Fm\nYc5LLA9nVs6Wam0DDYeVZWV8gAOJa5Un5XvRBZVAjQKBgQDM7JsPbmjZtBqyi3G+\nH5pkYxdrO56IwQIHy+SNriwz1OH6UcIeC+9IVrnjHG97Hwett2slXsbdcXe3zocb\nfocq8x/sdAbOf+UygfwVgl90oNPOQmMpUop9HRmpoeE67W8fKjUJF8H60pmpPSW4\nkwfnt+HT0TBXTYtJEiq93CAhtwKBgQC92TWrnahRwlswTn60AARqDxSLGFIi7IB4\nRWylLK7jZucsIhtiUXdAm1jVGHe5wyFodc0Jqp2wSrXxLrJZgoclC/pLJUFz/XW8\nTpSpuqq3JRIz2O1UdWVjmMVh+QHJg7JujXQfrnH2ut6ekaKlJiV/q7LZiib5ju6A\nLUxwuyPSPQKBgAc0Sj9Aom8E5etg+56zfboJwckDT49/OZMMl/xjIyqvUUJ7nVdx\nE/h3FBHn7gNmE98Hk7y8mEEwvAS6PgW5bQcVhQnLCnI4DNa5uyMGclSnUsrtio7p\nV/UOENjl2AU6U63EzhiDvU4UGVLZ03mpsZ1z2XyY3hozn7Hx8Y67LmYBAoGAb6/I\nRkUCz86STPHw0j4sWqSyhj3xnEAcOCVHjEikPn28RBdwmr+oc2awtPSnAq7MCaM7\n05L/H8ZkERZSsBv9G4tXXTv2rKEQ0Y49ITkC06nIcp4MySIjWpt2i3OtXHrQzv8C\nsNy0iN1YuFqfH584ckp1dkszMJ+oqdl8XdmKclUCgYEAnStFoaianui3efPMpQv3\nROejxu6JdVUBNu1+x3ImUbbM/Ewf0Af/zNjgPmVLiVzT/w/Yxu9zQbBWGXAtrq1J\n/WyEdImcBXiAg5qO1vVWZZqmBLymdjdFabWf7h02555mPd6gvns/Ojv610gBRKAp\n4FAxb/72SZecEtU3QxEw/Ng=\n-----END PRIVATE KEY-----\n",
-      "client_email": "accesodrive@practicasjv.iam.gserviceaccount.com",
-      "client_id": "113632277790861388454",
-      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-      "token_uri": "https://oauth2.googleapis.com/token",
-      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/accesodrive%40practicasjv.iam.gserviceaccount.com"
-    };
 
-    // Carga las credenciales de servicio
-    gapi.load('client', function () {
-      gapi.client.init({
-        'apiKey': 'AIzaSyBIlnhpL1tdF_WwNOm9veBAXJYgUWWd-pQ',
-        'clientId': '816453436793-mfrd0gmqokedqouu4hi8lbolle7tgej6.apps.googleusercontent.com',
-        'scope': 'https://www.googleapis.com/auth/spreadsheets',
-        'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-      }).then(function () {
-        // Carga el Google Sheet por su ID
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '11WTKoQoJHz8oQTSNI4Rh9Cw5eP4UZLOGvPqwBECUC20',
-          range: 'Respuestas de formulario 1', // Cambia a la hoja y rango que necesites
-        }).then(function(response) {
-          var sheetData = response.result.values;
+    // Función para guardar el token en Google Sheets
+    function guardarTokenEnGoogleSheets(token) {
+      // Reemplaza 'TU_JSON_CREDENTIALS' con el contenido de tu archivo de credenciales JSON
+      var credentials = {
+          "type": "service_account",
+          "project_id": "practicasjv",
+          "private_key_id": "7f414dcb54aca7815e2bff8a317370ccc4302291",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCX+I4AMPGclaCv\nE2Q2vomTF0j8SvqIkSC+2ffPnZXCm1xPIBhLPxJXVoVlaFp/53P4QOm43e2XkZJ7\nBQeiDZ3jC8PeqxVyJZTg6D7DfZTHXqY5iRPd/YlfKD8xiGYw9JmP/NwaDT5aaaQs\nC7+WWZkSqrYLJvS3MdxJF6leJWWiN0DvXLAwo1hPxFf6YiT+CO+XaiIQKEfedJXl\nhDepS1dnHdViXgn6t5AsWH9l9e5QuRp3vmmo/QQY9uC3T7UCk9AbV0byXXQdpMe4\nlsSSENeo1nxSwnJOxK/p3QCrIyhrODiYg6JNfZCm6PlmE9mxx0SDy+DKtnmr4x1g\nkuUYVSabAgMBAAECggEACtxA7aORyLJqushEe6MPOttJpHoJQHQ6plj2XDhzSOaI\naMEu60W1Hle5Db+w4/4a7A1bhpIZliDZmoAIBR07AMxI8aNBU5h69L20Ko1RchQC\nBg+VQ2KIjCvYpEYOo4X/aWpVIml64MQ27sziIrEBfvODMfXVPDhMeU6/FFLQ2hBD\nleGCIdxuZxMzzJ9DfKCSANLaFkfVGixawgDpYYVlGJOjMrkt3He7b/8nlopqVwvk\nupywGNKw9r2MhXhsl48+UgZND/0zQDS20xIHFIX3B69O1KKIqpAPxLPr7P7gc1Fm\nYc5LLA9nVs6Wam0DDYeVZWV8gAOJa5Un5XvRBZVAjQKBgQDM7JsPbmjZtBqyi3G+\nH5pkYxdrO56IwQIHy+SNriwz1OH6UcIeC+9IVrnjHG97Hwett2slXsbdcXe3zocb\nfocq8x/sdAbOf+UygfwVgl90oNPOQmMpUop9HRmpoeE67W8fKjUJF8H60pmpPSW4\nkwfnt+HT0TBXTYtJEiq93CAhtwKBgQC92TWrnahRwlswTn60AARqDxSLGFIi7IB4\nRWylLK7jZucsIhtiUXdAm1jVGHe5wyFodc0Jqp2wSrXxLrJZgoclC/pLJUFz/XW8\nTpSpuqq3JRIz2O1UdWVjmMVh+QHJg7JujXQfrnH2ut6ekaKlJiV/q7LZiib5ju6A\nLUxwuyPSPQKBgAc0Sj9Aom8E5etg+56zfboJwckDT49/OZMMl/xjIyqvUUJ7nVdx\nE/h3FBHn7gNmE98Hk7y8mEEwvAS6PgW5bQcVhQnLCnI4DNa5uyMGclSnUsrtio7p\nV/UOENjl2AU6U63EzhiDvU4UGVLZ03mpsZ1z2XyY3hozn7Hx8Y67LmYBAoGAb6/I\nRkUCz86STPHw0j4sWqSyhj3xnEAcOCVHjEikPn28RBdwmr+oc2awtPSnAq7MCaM7\n05L/H8ZkERZSsBv9G4tXXTv2rKEQ0Y49ITkC06nIcp4MySIjWpt2i3OtXHrQzv8C\nsNy0iN1YuFqfH584ckp1dkszMJ+oqdl8XdmKclUCgYEAnStFoaianui3efPMpQv3\nROejxu6JdVUBNu1+x3ImUbbM/Ewf0Af/zNjgPmVLiVzT/w/Yxu9zQbBWGXAtrq1J\n/WyEdImcBXiAg5qO1vVWZZqmBLymdjdFabWf7h02555mPd6gvns/Ojv610gBRKAp\n4FAxb/72SZecEtU3QxEw/Ng=\n-----END PRIVATE KEY-----\n",
+          "client_email": "accesodrive@practicasjv.iam.gserviceaccount.com",
+          "client_id": "113632277790861388454",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/accesodrive%40practicasjv.iam.gserviceaccount.com"
+      };
 
-          // Muestra los datos en la página
-          var sheetDataElement = document.getElementById('sheetData');
-          sheetDataElement.textContent = JSON.stringify(sheetData, null, 2);
+      // Carga las credenciales de servicio
+      gapi.load('client', function () {
+        gapi.client.init({
+          'apiKey': 'AIzaSyBIlnhpL1tdF_WwNOm9veBAXJYgUWWd-pQ',
+          'scope': 'https://www.googleapis.com/auth/spreadsheets',
+          'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        }).then(function () {
+          // Identifica la hoja de cálculo donde deseas guardar el token
+          var spreadsheetId = '1eO13HkJDyaTu-g7hqr-Wxpm5UzEW0gBnL8EPJOAEdBY';
+          var range = 'Hoja 1'; // Cambia a la hoja que necesites
+
+          // Crea un objeto de datos para enviar al Google Sheet
+          var values = [[token]];
+
+          // Realiza una solicitud para agregar una fila con el token
+          gapi.client.sheets.spreadsheets.values.append({
+            spreadsheetId: spreadsheetId,
+            range: range,
+            valueInputOption: 'RAW',
+            insertDataOption: 'INSERT_ROWS',
+            values: values,
+          }).then(function (response) {
+            var result = response.result;
+            console.log('Token guardado en Google Sheets:', result);
+          });
         });
       });
-    });
+    }
   </script>
   <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>
+
