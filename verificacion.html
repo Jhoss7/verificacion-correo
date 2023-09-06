@@ -120,25 +120,67 @@
        * Print the names and majors of students in a sample spreadsheet:
        * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
        */
-      async function listMajors() {
-        let response;
-        try {
-          // Fetch first 10 files
-          response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '11WTKoQoJHz8oQTSNI4Rh9Cw5eP4UZLOGvPqwBECUC20',
-            range: 'Respuestas de formulario 1!A2:E',
-          });
-        } catch (err) {
-          console.error(err)
-          return;
-        }
-        const range = response.result;
-        if (!range || !range.values || range.values.length == 0) {
-          console.warn("No hay datos")
-          return;
-        }
-        console.log(range.values)
+async function listMajors() {
+  let response;
+  try {
+    // Fetch first 10 files
+    response = await gapi.client.sheets.spreadsheets.values.get({
+      spreadsheetId: '11WTKoQoJHz8oQTSNI4Rh9Cw5eP4UZLOGvPqwBECUC20',
+      range: 'Respuestas de formulario 1!A2:K',
+    });
+  } catch (err) {
+    console.error(err)
+    return;
+  }
+  const range = response.result;
+  if (!range || !range.values || range.values.length == 0) {
+    console.warn("No hay datos")
+    return;
+  }
+
+  // Captura el token de la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token');
+
+  // Encuentra la columna de tokens y la columna de validación
+  const headers = range.values[0];
+  const tokenColumnIndex = headers.indexOf(Token);
+  const validationColumnIndex = headers.indexOf(Validacion);
+
+  if (tokenColumnIndex === -1 || validationColumnIndex === -1) {
+    console.error(`Columnas '${Token}' o '${Validacion}' no encontradas`);
+    return;
+  }
+
+  // Verifica si el token existe en la columna de tokens
+  for (let i = 1; i < range.values.length; i++) {
+    const rowData = range.values[i];
+    const tokenColumnValue = rowData[tokenColumnIndex];
+    
+    if (tokenColumnValue === token) {
+      // Escribe "VERIFICADO" en la columna de validación
+      const sheetName = 'Respuestas de formulario 1';
+      const rangeToUpdate = `${sheetName}!${String.fromCharCode(65 + validationColumnIndex)}${i + 1}`;
+      const valueToSet = "VERIFICADO";
+
+      try {
+        await gapi.client.sheets.spreadsheets.values.update({
+          spreadsheetId: '11WTKoQoJHz8oQTSNI4Rh9Cw5eP4UZLOGvPqwBECUC20',
+          range: rangeToUpdate,
+          valueInputOption: 'RAW',
+        }, {
+          values: [[valueToSet]],
+        });
+        console.log("Token verificado y marcado como VERIFICADO");
+      } catch (err) {
+        console.error("Error al actualizar la celda de validación:", err);
       }
+      return; // Devuelve el mensaje de verificación
+    }
+  }
+
+  console.log("Token no encontrado en la columna de tokens");
+}
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
