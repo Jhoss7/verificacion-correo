@@ -145,9 +145,9 @@ async function listMajors() {
 
   // Encuentra la columna de tokens y la columna de validación
   const headers = range.values[0];
-  const tokenColumnIndex = headers.indexOf(Token);
+  const tokenColumnIndex = headers.indexOf("Token");
   console.log(tokenColumnIndex)
-  const validationColumnIndex = headers.indexOf(Validacion);
+  const validationColumnIndex = headers.indexOf("Validacion");
   console.log(validationColumnIndex)
 
   if (tokenColumnIndex === -1 || validationColumnIndex === -1) {
