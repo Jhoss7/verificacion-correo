@@ -145,16 +145,9 @@ async function listMajors() {
 
   // Encuentra la columna de tokens y la columna de validación
   const headers = range.values[0];
-  const tokenColumnIndex = headers.indexOf("Token");
-  console.log(tokenColumnIndex)
-  const validationColumnIndex = headers.indexOf("Validacion");
-  console.log(validationColumnIndex)
-
-  if (tokenColumnIndex === -1 || validationColumnIndex === -1) {
-    console.error(`Columnas '${Token}' o '${Validacion}' no encontradas`);
-    return;
-  }
-
+  const tokenColumnIndex = 10;
+  const validationColumnIndex = 9;
+  
   // Verifica si el token existe en la columna de tokens
   for (let i = 1; i < range.values.length; i++) {
     const rowData = range.values[i];
