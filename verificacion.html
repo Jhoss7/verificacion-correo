@@ -141,11 +141,14 @@ async function listMajors() {
   // Captura el token de la URL
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get('token');
+  console.log(token)
 
   // Encuentra la columna de tokens y la columna de validación
   const headers = range.values[0];
   const tokenColumnIndex = headers.indexOf(Token);
+  console.log(tokenColumnIndex)
   const validationColumnIndex = headers.indexOf(Validacion);
+  console.log(validationColumnIndex)
 
   if (tokenColumnIndex === -1 || validationColumnIndex === -1) {
     console.error(`Columnas '${Token}' o '${Validacion}' no encontradas`);
@@ -156,6 +159,7 @@ async function listMajors() {
   for (let i = 1; i < range.values.length; i++) {
     const rowData = range.values[i];
     const tokenColumnValue = rowData[tokenColumnIndex];
+    console.log(tokenColumnValue)
     
     if (tokenColumnValue === token) {
       // Escribe "VERIFICADO" en la columna de validación
